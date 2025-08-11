@@ -1,4 +1,4 @@
-# example
+# Here are some samples of my work
 
 - [C++](C++)
    - [Windows application configuration parser and editor parts.](C++/config)
