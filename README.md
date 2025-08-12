@@ -1,7 +1,7 @@
 # Here are some samples of my work
 
 - [PHP](PHP)
-   - [DBMS deadlock recovery.](PHP)
+   - [Y Combinator Scraper Application.](PHP)
    - [AJAX helper for the traditional web application.](PHP)
    - [Route applicability description parser.](PHP)
    - [JS challenge.](PHP)
