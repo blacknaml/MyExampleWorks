@@ -1,0 +1,1 @@
+<tr><td colspan="3" align="center"><?=$message;?></td></tr>

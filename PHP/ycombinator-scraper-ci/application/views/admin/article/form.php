@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box box-danger">
+			<div class="box-header">
+				<h3 class="box-title">Post New Article</h3>
+			</div>
+			<div id="error_b"></div>
+			<form action="<?=current_url().'/submit';?>" method="post" role="form">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="i-category">Category</label>
+						<?=form_dropdown('i-category', $scraper_cbo, '', 'id="i-category" class="form-control"');?>
+					</div>
+					<div class="form-group">
+						<label for="i-account">Account</label>
+						<?=form_dropdown('i-account', $account_cbo, '', 'id="i-account" class="form-control"');?>
+					</div>
+					<div class="form-group">
+						<label for="i-title">Title</label>
+						<input type="text" class="form-control" name="i-title" id="i-title" placeholder="Title">
+					</div>
+					<div class="form-group">
+						<label for="i-article-url">Url</label>
+						<input type="text" class="form-control" name="i-article-url" id="i-article-url" placeholder="Link Url">
+					</div>
+					<div class="form-group">
+						<label for="i-content">Or Content</label>
+						<textarea class="form-control" rows="5" name="i-content" id="i-content" placeholder="Content"></textarea>
+					</div>
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary" data-loading-text="Posting ...">Post</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('form').submit(function(){
+		var btn = $(this).find('button[type="submit"]');
+		btn.button('loading');
+
+		$.ajax({
+			url: $(this).attr('action'),
+			data: $(this).serialize(),
+			dataType: 'json',
+			type: 'post',
+			beforeSend: function() {}, 
+			success: function(response){
+				json_handler(response);
+				if(response.type == 'success'){	}
+				btn.button('reset');
+			},
+			error: function(){
+				btn.button('reset');	
+			}
+		});
+
+		return false;
+	});
+	$('#i-category').change(function(){
+		$.ajax({
+			url: '<?=current_url()."/category_change";?>',
+			data: {'i-category': $(this).val()},
+			dataType: 'json',
+			type: 'post',
+			beforeSend: function() {}, 
+			success: function(response){
+				json_handler(response);
+				if(response.type == 'success'){ $('#i-account').html('').html(response.param.opt); }
+			},
+			error: function(){ alert('Error Connection to server.'); }
+		});
+
+		return false;
+	});
+})
+</script>

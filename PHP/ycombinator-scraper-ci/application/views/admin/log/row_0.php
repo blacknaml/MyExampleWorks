@@ -1,0 +1,1 @@
+<tr><td colspan='4' align='center'><?=$message;?></td></tr>
